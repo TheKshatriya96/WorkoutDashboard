@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090b0a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Swapnil Training" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Swapnil Training</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/storage/indexed-db.js"></script>
+  <script defer src="assets/js/storage/storage-adapter.js"></script>
+  <script defer src="assets/js/storage/supabase-sync.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark"></span>SWAPNIL / BUILD</div>
+      <div class="topbar-actions">
+        <div class="sync-pill" id="sync-status">Local only</div>
+        <button class="icon-btn" id="settings-open" aria-label="Open settings">⚙</button>
+      </div>
+      <div class="goal">61 kg → 67 kg<br>controlled lean bulk</div>
+    </header>
+
+    <nav class="main-tabs" aria-label="Dashboard sections">
+      <button class="main-tab active" data-view="workout">Workout</button>
+      <button class="main-tab" data-view="diet">Diet</button>
+      <button class="main-tab" data-view="progress">Progress</button>
+    </nav>
+
+    <main>
+      <section class="view active" id="workout-view">
+        <div class="workout-shell">
+          <nav class="day-rail" id="day-rail" aria-label="Workout day"></nav>
+          <div class="exercise-stage" id="exercise-stage" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="view" id="diet-view">
+        <div class="diet-wrap">
+          <div class="diet-head">
+            <div>
+              <h1>Eat to grow.</h1>
+              <p>A repeatable Indian meal structure near your starting target. Portions and cooking oil decide the real numbers.</p>
+            </div>
+            <div class="diet-switch" aria-label="Diet preference">
+              <button class="diet-option active" data-diet="veg">Veg</button>
+              <button class="diet-option" data-diet="nonveg">Non-veg</button>
+            </div>
+          </div>
+          <div id="diet-content"></div>
+        </div>
+      </section>
+
+      <section class="view" id="progress-view">
+        <div class="progress-wrap">
+          <div class="progress-head">
+            <div>
+              <h1>Progress</h1>
+              <p>Bodyweight, workout history, exports and local backups.</p>
+            </div>
+          </div>
+          <div id="progress-content"></div>
+        </div>
+      </section>
+    </main>
+
+    <section class="rest-timer hidden" id="rest-timer" aria-live="polite"></section>
+
+    <dialog class="settings-dialog" id="settings-dialog">
+      <div class="settings-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Preferences</p>
+            <h2>Settings</h2>
+          </div>
+          <button class="icon-btn" id="settings-close" aria-label="Close settings">×</button>
+        </div>
+
+        <div class="settings-grid">
+          <label class="toggle-row"><span>Sound</span><input id="setting-sound" type="checkbox" /></label>
+          <label class="toggle-row"><span>Vibration</span><input id="setting-vibration" type="checkbox" /></label>
+          <label class="toggle-row"><span>Auto-start rest timer</span><input id="setting-autorest" type="checkbox" /></label>
+          <label class="toggle-row"><span>Browser notifications</span><input id="setting-notifications" type="checkbox" /></label>
+
+          <label class="field-row">
+            <span>Completion sound</span>
+            <select id="setting-sound-type">
+              <option value="off">Off</option>
+              <option value="short-beep">Short beep</option>
+              <option value="double-beep">Double beep</option>
+              <option value="chime">Bell/chime</option>
+              <option value="round-bell">Boxing round bell</option>
+              <option value="custom">Custom uploaded sound</option>
+            </select>
+          </label>
+
+          <label class="field-row">
+            <span>Volume</span>
+            <input id="setting-volume" type="range" min="0" max="1" step="0.05" />
+          </label>
+
+          <label class="field-row">
+            <span>Custom sound</span>
+            <input id="custom-sound" type="file" accept=".mp3,.wav,.m4a,.ogg,audio/*" />
+          </label>
+
+          <div class="button-row">
+            <button type="button" id="preview-sound">Preview</button>
+            <button type="button" id="reset-sound">Reset sound</button>
+            <button type="button" id="enable-notifications">Enable notifications</button>
+          </div>
+
+          <form class="login-box" id="supabase-login">
+            <label class="field-row">
+              <span>Supabase email</span>
+              <input id="supabase-email" type="email" placeholder="you@example.com" autocomplete="email" />
+            </label>
+            <button type="submit">Send magic link</button>
+          </form>
+        </div>
+
+        <p class="settings-note">Custom sound works while the dashboard/PWA is active. Background notifications on iPhone may use the system notification sound instead of custom audio.</p>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>

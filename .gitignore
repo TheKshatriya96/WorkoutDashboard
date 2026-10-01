@@ -1,0 +1,9 @@
+assets/js/config.js
+exports/
+backups/
+*.db
+*.sqlite
+*.sqlite3
+exports/*.csv
+backups/*.csv
+*.bak
